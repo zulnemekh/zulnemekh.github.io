@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="/images/bet/betp2p.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <style>
+        body {
+            padding-top: 100px;
+            background-color: #eee;
+        }
+       .token-info {
+			color: rgba(0,0,0,.84);
+            font-size: 60; 
+            font-weight: bold;
+            line-height: 1.22;
+            letter-spacing: -.012em;
+		}
+		.center {
+		    display: block;
+		    margin-left: auto;
+		    margin-right: auto;
+		    width: 50%;
+		}
+		.border1 {
+			padding-top: 8px; border: 2px solid !important; border-color: #7f848e!important;
+		}
+        .mycolumn {
+            float: left;
+            width: 33%;
+            text-align: center;
+        }
+
+        /* Clear floats after the columns */
+        .myrow:after {
+            content: "";
+            display: table;
+            clear: both;
+            
+        }
+
+    </style>
+    <title>Bet p2p</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container">
+        	<a class="navbar-brand"><img width="60" height="60"  src="images/bet/betp2p3.png"></a>  
+                        	 
+            <div class="alert alert-primary" style="margin-bottom: 0; margin-right: 5px; background-color: #17a2b8!important; "><span style="color: black;"><strong>balance: </strong></span><span id="balance_eth">0</span></div>
+			<div id="address" class="alert alert-primary" style="margin-bottom: 0;"><span style="color: black;"><strong>address: </strong></span><span id="add"></span></div>
+			
+        </div>
+    </nav>
+    <div class="container">
+        	 
+        	 <div class="row"  id="conbets">
+                <div id="buysuccess" class="alert alert-success" style="display:none">
+                                Гүйлгээ амжилттай хийгдлээ, доорх хаягаар орж шалгана уу.<br>
+                                <a id="txlink" target="_blank" href="https://ropsten.etherscan.io/tx/"></a>
+                            </div>
+
+            
+                <div id="template" class="col-xl-6" style="display: none">
+
+                    <div class="card w-80" style="background-color: #2bbd6b; ">
+                      <div  class="card-body">
+                        <center>
+                        <h5 class="card-title" id="bet_name">Germany vs Korea</h5>
+                        <div > <img  id="par1"  width="150" height="90"  src="/images/flag/ru.png" alt="lucky lucky">
+                            <img  style="padding: 20px;" width="80" height="70"  src="/images/vs.png" alt="lucky lucky">    
+                            <img  id="par2" width="150" height="90"  src="/images/flag/kr.png" alt="lucky lucky">   
+                            
+                        </div>
+                        </center>
+                        <div class="myrow" style="margin-top: 5px;   border-radius: 10px; background-color: ;" >  
+                        
+                           <div class="mycolumn"><span class="token-info"><strong id="fundpar1"> price: </strong> </span><span id="par1_price">0</span>
+
+                           </div>
+                            <div class="mycolumn"><span class="token-info"><strong id="fundpar0">Draw: </strong> </span><span id="draw_price">0</span></div>
+                            <div class="mycolumn"><span class="token-info"><strong id="fundpar2"> price: </strong> </span><span id="par2_price">0</span></div>
+
+                        <div><span class="token-info"><strong>Your bet: </strong> </span><span id="your_bet">0</span></div>
+                        <div><span class="token-info"><strong>Bet close time: </strong> </span><span id="bet_closetime">0</span></div>
+                        
+                        </div> <!-- row -->
+
+                        </div>
+                         <div class="col-12 col-md-4 mb-2 mb-md-0">
+                              <input id="amount" type="number" step="any" class="form-control form-control-lg" placeholder="Ether">
+                            </div>  
+                          <br> 
+                          <div class="col-12" style="padding-bottom: 5px;"> 
+                             <button id="betpar1" class="btn btn-danger" onClick="bet_click_par1(this.id)">Bet par1</button>                         
+                             <button id="betpar2" class="btn btn-danger" onClick="bet_click_par2(this.id)">Bet par2</button>                         
+                             <button id="betpar0" class="btn btn-danger" onClick="bet_click_par0(this.id)">Bet Draw</button>  
+                          </div>
+                      </div>
+
+                </div><!-- id="template" -->
+                    
+                    
+        	 	
+        	 </div>	   <!-- row -->
+
+        </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="./scripts/web3.min.js"></script>
+    <script src="./scripts/moment.min.js"></script>
+    <script src="./scripts/bignumber.min.js"></script>
+
+    <script type="text/javascript">    
+      var country_flag = {};
+
+			country_flag["Russia"] ='/images/flag/ru.png';
+			country_flag["Germany"] ='/images/flag/de.png';
+			country_flag["Brazil"] ='/images/flag/br.png';
+			country_flag["Portugal"] ='/images/flag/pt.png';
+			country_flag["France"] ='/images/flag/fr.png';
+			country_flag["Uruguay"] ='/images/flag/uy.png';
+			country_flag["Argentina"] ='/images/flag/ar.png';
+			country_flag["England"] ='/images/flag/gb.png';
+			country_flag["Spain"] ='/images/flag/sp.png';
+			country_flag["Mexico"] ='/images/flag/mx.png';
+			country_flag["Belgium"] ='/images/flag/be.png';
+			country_flag["Colombia"] ='/images/flag/co.png';
+			country_flag["Croatia"] ='/images/flag/cw.png';
+			country_flag["Sweden"] ='/images/flag/se.png';
+			country_flag["Egypt"] ='/images/flag/eg.png';
+			country_flag["Poland"] ='/images/flag/pl.png';
+			country_flag["Australia"] ='/images/flag/au.png';
+			country_flag["Senegal"] ='/images/flag/sn.png';
+			country_flag["Iran"] ='/images/flag/ir.png';
+			country_flag["Japan"] ='/images/flag/jp.png';
+			country_flag["South Korea"] ='/images/flag/kr.png';
+			country_flag["Saudi Arabia"] ='/images/flag/sa.png';
+			country_flag["Nigeria"] ='/images/flag/ng.png';
+			country_flag["Costa Rica"] ='/images/flag/cr.png';
+			country_flag["Iceland"] ='/images/flag/is.png';
+			country_flag["Serbia"] ='/images/flag/rs.png';
+			country_flag["Panama"] ='/images/flag/pa.png';
+			country_flag["Switzerland"] ='/images/flag/sw.png';
+			country_flag["Denmark"] ='/images/flag/dk.png';
+			country_flag["Tunisia"] ='/images/flag/tn.png';
+			country_flag["Morocco"] ='/images/flag/ma.png';
+			country_flag["Peru"] ='/images/flag/pe.png';
+      
+      var unimediatoken_address = '0x579276922c9a10a7dd909f0a4a841bdc4c4d8862';
+      var fifabet_address = '0xC084b36c1307d035FF06219E63182a38ec6AC326';
+      window.onload = function() {
+
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+             web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/hq9l5D1Moq7KjYPgyfNn"));
+            
+        }
+
+
+
+          web3.eth.defaultAccount = web3.eth.accounts[0];
+          if (web3.eth.defaultAccount) {
+           document.getElementById('add').innerHTML =web3.eth.defaultAccount;
+           document.getElementById('address').className = '';
+           document.getElementById('address').className = 'alert alert-primary';
+           
+	       }else{
+	       document.getElementById('add').innerHTML = 'You must login by metamask';
+	       document.getElementById('address').className = '';
+           document.getElementById('address').className = 'alert alert-danger';
+	       }
+         
+        var unimediatokenContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"price","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeSub","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeDiv","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"},{"name":"_data","type":"bytes"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeMul","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeAdd","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"sellcloseTIMESTAMP","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}]);
+
+
+            
+            window.unimediatoken= unimediatokenContract.at(unimediatoken_address);
+            console.log(window.unimediatoken );
+
+         
+           
+     var betworldcup2018Contract = web3.eth.contract([{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"}],"name":"getBet","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint8"},{"name":"","type":"bool"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getBetLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"disableBets","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"campaigns","outputs":[{"name":"user_address","type":"address"},{"name":"amount","type":"uint256"},{"name":"bet_id","type":"uint256"},{"name":"winner","type":"uint8"},{"name":"betTIMESTAMP","type":"uint256"},{"name":"isWon","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"betUserWonAmountOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"bets","outputs":[{"name":"par1","type":"uint256"},{"name":"par2","type":"uint256"},{"name":"closeTIMESTAMP","type":"uint256"},{"name":"winner","type":"uint8"},{"name":"isAvailable","type":"bool"},{"name":"description","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"betUserOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"address"}],"name":"betUserAmountOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getCampaignLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"},{"name":"user_bet","type":"uint256"}],"name":"getUserBet","outputs":[{"name":"","type":"address"},{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint8"},{"name":"","type":"uint256"},{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"bet_id","type":"uint256"},{"name":"winner","type":"uint8"}],"name":"takeBet","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"}],"name":"getUserBetsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"}],"name":"getTotalAmountOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"},{"name":"user_address","type":"address"}],"name":"getUserBetOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showSmallProfit","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"bet_id","type":"uint256"},{"name":"winner","type":"uint8"}],"name":"agreeBetWinner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"},{"name":"winner","type":"uint256"}],"name":"getBetAmountOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"bet_id","type":"uint256"}],"name":"setDisableBet","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"name":"betAmountOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"}],"name":"getBetName","outputs":[{"name":"","type":"string"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"bet_id","type":"uint256"}],"name":"getDisableBet","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"par_id","type":"uint256"}],"name":"getParticipateName","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"par1","type":"uint256"},{"name":"par2","type":"uint256"},{"name":"closeTIMESTAMP","type":"uint256"},{"name":"isAvailable","type":"bool"},{"name":"desc","type":"string"}],"name":"createBet","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"bet_id","type":"uint256"},{"indexed":false,"name":"winner","type":"uint8"}],"name":"Won","type":"event"}]);
+
+
+ 		
+ 		window.betworldcup = betworldcup2018Contract.at(fifabet_address);
+            console.log(window.betworldcup );
+
+		// $('button[id^="betpar2"]').click(function() {
+		
+
+          web3.eth.getAccounts(function(err, accs) {
+                if (err) return console.error(err);
+                  var acc = web3.eth.defaultAccount;
+
+	               web3.eth.getBalance(acc, (err, res) => {
+                        if (err) return console.error(err);
+                        balance = web3.toDecimal(res);
+						document.getElementById('balance_eth').innerHTML = web3.fromWei(balance, 'ether') + ' ETH';
+  					})
+					
+                   
+            }); // web3.eth
+
+             betworldcup.getBetLength((err, res) => {
+                    if (err) return console.error(err);
+                    var count = new BigNumber(res);
+                     getBets(count);
+                });
+
+               function getBets(count){
+                       
+				let selectGrid = document.getElementById('conbets');
+               
+    
+
+               		for (var i = 0; i < count; i++) {
+
+						
+                    let rowHTML = ` <div id="template" class="col-xl-6" style="margin-bottom 20px !important;">
+
+                    <div class="card w-80" style="margin-bottom 20px !important; background-color: #80daa8; margin-bottom: 30px;">
+                      <div  class="card-body">
+                        <center>
+                        <h5 class="card-title" id="bet_name${i}">Germany vs Korea</h5>
+                        <div > <img  id="par1${i}"  width="150" height="90"  src="/images/flag/ru.png" alt="lucky lucky">
+                            <img  style="padding: 20px;" width="80" height="70"  src="/images/vs.png" alt="lucky lucky">    
+                            <img  id="par2${i}" width="150" height="90"  src="/images/flag/kr.png" alt="lucky lucky">   
+                            
+                        </div>
+                        </center>
+                        <div class="myrow" style="margin-top: 5px;   border-radius: 10px; background-color: ;" >  
+                        
+                           <div class="mycolumn"><span class="token-info"><strong id="fundpar1${i}"> price: </strong> </span><span id="par1_price${i}">0</span>
+
+                           </div>
+                            <div class="mycolumn"><span class="token-info"><strong id="fundpar0${i}">Draw: </strong> </span><span id="draw_price${i}">0</span></div>
+                            <div class="mycolumn"><span class="token-info"><strong id="fundpar2${i}"> price: </strong> </span><span id="par2_price${i}">0</span></div>
+                           <br> 
+                        <div style="padding: 3px; padding-left: 15px; margin-top: 10px; background-color: #f5edd7;">
+                            <div><span class="token-info"><strong>Your bet: </strong> </span><span id="your_bet${i}">0</span><span id="your_bet_country${i}"> </span><span><strong id="your_winner_price${i}" style="color: red;"></strong> </span></div>
+                            <div><span class="token-info"><strong>Bet close time: </strong> </span><span id="bet_closetime${i}">0</span></div>
+                        </div>
+                        </div> <!-- row -->
+
+                        </div>
+                         <div class="form-row">
+                         <div class="col-12 col-md-4 mb-2 mb-md-0">
+                              <input id="amount${i}" type="number" step="any" class="form-control form-control-lg" style="margin-left: 18px;" placeholder="Ether">
+                            </div>
+                                 
+                           </div>     
+                          <br> 
+                          <div class="col-12" style="padding-bottom: 5px;"> 
+                             <button id="betpar1${i}" class="btn btn-danger" onClick="bet_click_par1(this.id)">Bet par1</button>                         
+                             <button id="betpar2${i}" class="btn btn-danger" onClick="bet_click_par2(this.id)">Bet par2</button>                         
+                             <button id="betpar0${i}" class="btn btn-danger" onClick="bet_click_par0(this.id)">Bet Draw</button>  
+                          </div>
+                      </div>
+
+                </div><!-- id="template" --> `;
+
+					selectGrid.insertAdjacentHTML('beforeend', rowHTML)
+		
+
+                        getBetName(i);
+                        getBet(i);
+                       	betAmountOf(i,3);
+                       	betAmountOf(i,1);
+                       	betAmountOf(i,2);
+                       	betUserAmountOf(i,web3.eth.defaultAccount);
+                        betUserOf(i,web3.eth.defaultAccount);
+                        betUserWonAmountOf(i,web3.eth.defaultAccount);
+	               		} //for
+
+	               		function getBetName (i) {
+						  return new Promise (function (resolve, reject) {
+						    betworldcup.getBetName(i, function (error, result) {
+						      if (error) 
+						        reject(error);
+						       else {
+								     $('#bet_name'+i).html(result[0].toString() +" vs "+ result[1].toString());  								  
+					                 $('#par1'+i).attr('src', country_flag[result[0].toString()]); 
+					                 $('#par2'+i).attr('src', country_flag[result[1].toString()]); 
+					                 $('#betpar1'+i).html('Bet '+result[0].toString()); 
+					                 $('#betpar2'+i).html('Bet '+result[1].toString()); 
+                                     
+                                     $('#fundpar1'+i).html(result[0].toString()); 
+                                     $('#fundpar2'+i).html(result[1].toString()); 
+                                     
+					                 
+					              } 
+						        // resolve(result);						    
+							  })
+							})
+	               		} // getBetNameEnd 
+
+                      
+
+	               		function getBet(i) {
+						  return new Promise (function (resolve, reject) {
+						    betworldcup.getBet(i, function (error, res) {
+						      if (error) 
+						        reject(error);
+						       else {
+							       	var ends = moment(BigNumber(res[2]).toNumber() * 1000);
+
+                                    console.log('timestamp1:'+ Math.floor(Date.now() / 1000));
+                                    console.log('timestamp2:'+BigNumber(res[2]).toNumber());
+                                    if (BigNumber(res[2]).toNumber() < Math.floor(Date.now() / 1000)) {
+                                        $("#amount"+i).attr('disabled','disabled');
+                                        $("#amount"+i).attr('placeholder','bet is closed!');
+                                        
+                                    }
+						       		$('#bet_closetime'+i).html(ends.format('YYYY-MM-DD HH:mm'));  
+						       		}						 
+							  })
+							})
+	               		}
+
+	               		function betAmountOf(i, winner) {
+						  return new Promise (function (resolve, reject) {
+						    betworldcup.betAmountOf(i, winner, function (error, res) {
+						      if (error) 
+						        reject(error);
+						       else {
+							       	 par1_amount = new BigNumber(res);  
+							       	 if (winner == 3) {
+              	                     	$('#draw_price'+i).html(web3.fromWei(par1_amount, 'ether') + ' ETH'); 
+                                        }
+              	                 	 if (winner == 1) {
+              	                     	$('#par1_price'+i).html(web3.fromWei(par1_amount, 'ether')+ ' ETH'); 
+                                        }
+              	                 	 if (winner == 2){
+                                         $('#par2_price'+i).html(web3.fromWei(par1_amount, 'ether')+ ' ETH'); 
+                                        } 
+              	                    	
+						       		}						 
+							  })
+							})
+	               		}
+                        
+
+	               		function betUserAmountOf(i, address) {
+						  return new Promise (function (resolve, reject) {
+						    betworldcup.betUserAmountOf(i, address, function (error, res) {
+						      if (error) 
+						        reject(error);
+						       else {
+							       	 par1_amount = new BigNumber(res); 
+						       		$('#your_bet'+i).html(web3.fromWei(par1_amount, 'ether') + ' ETH'); 
+						       		}						 
+							  })
+							})
+	               		} // betUserAmountOf end
+
+                        function getBetNameByBetID (bet_id, winner) {
+                          return new Promise (function (resolve, reject) {
+                            betworldcup.getBetName(bet_id, function (error, result) {
+                              if (error) 
+                                reject(error);
+                               else {                                    
+                                      if (winner == 1) {
+                                        $('#your_bet_country'+bet_id).html(' on '+result[0].toString()+ '.');
+                                      }
+                                      if (winner == 2) {
+                                        $('#your_bet_country'+bet_id).html(' on '+result[1].toString()+ '.');
+                                      }
+                                      if (winner == 3) {
+                                        $('#your_bet_country'+bet_id).html(' on draw.');
+                                      }
+                                    
+                                  } 
+                                // resolve(result);                         
+                              })
+                            })
+                        } // getBetNameEnd 
+
+                        function betUserOf(i, address) {
+                          return new Promise (function (resolve, reject) {
+                            betworldcup.betUserOf(i, address, function (error, res) {
+                              if (error) 
+                                reject(error);
+                               else {
+                                     winner = new BigNumber(res); 
+
+                                     getBetNameByBetID(i, winner);                                  
+                                    }                        
+                              })
+                            })
+                        }
+
+                        function betUserWonAmountOf(i, address) {
+                          return new Promise (function (resolve, reject) {
+                            betworldcup.betUserWonAmountOf(i, address, function (error, res) {
+                              if (error) 
+                                reject(error);
+                               else {
+                                     winner_amount = new BigNumber(res); 
+                                         if (winner_amount > 0) {
+                                            $('#your_winner_price'+i).html("   &nbsp; &nbsp;You won "+web3.fromWei(winner_amount, 'ether') + ' ETH here.');                                      
+                                         }
+                                    
+                                    }                        
+                              })
+                            })
+                        }
+
+
+                     
+	               		
+	       
+  			}
+
+
+      } // window.load
+
+        function bet_click_par1(clicked_id) {           
+            bet_id=clicked_id.substring('betpar1'.length, clicked_id.length);            
+            takeBet(bet_id, 1);
+        }
+
+		function bet_click_par2(clicked_id) {			
+            bet_id=clicked_id.substring('betpar2'.length, clicked_id.length);			
+            takeBet(bet_id, 2);
+
+		}
+        function bet_click_par0(clicked_id) {           
+            bet_id=clicked_id.substring('betpar0'.length, clicked_id.length);            
+            takeBet(bet_id, 3);
+
+        }
+        function takeBet(bet_id, par) {
+            // body...
+            var acc= web3.eth.defaultAccount;
+            var number = document.getElementById('amount'+bet_id).value;
+                  
+
+              betworldcup.takeBet(bet_id, par, {from: acc, gas: 5000000, value: web3.toWei(number)}, function(err, hash){
+                   if (err) return console.error(err);                
+                document.getElementById('txlink').href += hash;
+                document.getElementById('txlink').innerHTML = hash;
+                document.getElementById('buysuccess').style.display = 'block';
+              });
+
+  
+        }
+
+
+    </script>
+
+  </body>
+</html>

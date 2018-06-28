@@ -151,8 +151,8 @@
 			country_flag["Morocco"] ='/images/flag/ma.png';
 			country_flag["Peru"] ='/images/flag/pe.png';
       
-      var unimediatoken_address = '0x579276922c9a10a7dd909f0a4a841bdc4c4d8862';
-      var fifabet_address = '0xC084b36c1307d035FF06219E63182a38ec6AC326';
+      const unimediatoken_address = '0x579276922c9a10a7dd909f0a4a841bdc4c4d8862';
+      const fifabet_address = '0xC084b36c1307d035FF06219E63182a38ec6AC326';
       window.onload = function() {
 
         if (typeof web3 !== 'undefined') {
@@ -443,7 +443,7 @@
             var number = document.getElementById('amount'+bet_id).value;
                   
 
-              betworldcup.takeBet(bet_id, par, {from: acc, gas: 5000000, value: web3.toWei(number)}, function(err, hash){
+              betworldcup.takeBet(bet_id, par, {from: acc, gas: 3000000, value: web3.toWei(number)}, function(err, hash){
                    if (err) return console.error(err);                
                 document.getElementById('txlink').href += hash;
                 document.getElementById('txlink').innerHTML = hash;

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="/images/gambling-blockchain.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <style>
+        body {
+            padding-top: 100px;
+            background-color: #eee;
+        }
+       .token-info {
+			color: rgba(0,0,0,.84);
+            font-size: 60; 
+            font-weight: bold;
+            line-height: 1.22;
+            letter-spacing: -.012em;
+		}
+		.center {
+		    display: block;
+		    margin-left: auto;
+		    margin-right: auto;
+		    width: 50%;
+		}
+
+    </style>
+    <title>Gambling</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <div class="container">
+        	<a class="navbar-brand"><img width="150px" src="images/gambling-blockchain.png"></a>                	 
+			<div id="address" class="alert alert-primary" style="margin-bottom: 0;"><span style="color: black;"><strong>address: </strong></span><span id="add"></span></div>
+			
+        </div>
+    </nav>
+    <div class="container">
+        	 
+        	 <div class="row">
+        	 	<div class="col-xl-3">
+        	 		<br>
+        	 		<div class="card" style="width: 18rem;">
+        	 			<img  class="center" align="middle" style="padding-top: 8px;" width="150px" src="/images/luckylucky-circle.png" alt="lucky lucky">
+					  
+					  <div class="card-body">
+                        <div><span class="token-info"><strong> one time price: </strong> </span><span id="name"></span>0.01 ETH</div>
+					    <div><span class="token-info"><strong>chance round 1: </strong> </span><span id="name"></span>20%</div>
+					    <div><span class="token-info"><strong>price round 1:  </strong> </span><span id="name">0.05 ETH</span></div>
+					    <div><span class="token-info"><strong>chance round 2: </strong> </span><span id="name">1%</span></div>
+					    <div><span class="token-info"><strong>price round 2:  </strong> </span><span id="name">1 ETH</span></div>
+
+					    <a id="get_lucky" href="#" class="btn btn-primary">get lucky</a>
+					  </div>
+			           <div id="buysuccess" class="alert alert-success" style="display:none">
+                                Гүйлгээ амжилттай хийгдлээ, доорх хаягаар орж шалгана уу.<br>
+                                <a id="txlink" target="_blank" href="https://ropsten.etherscan.io/tx/"></a>
+                            </div>
+					</div>
+        	 		
+        	 		<br>
+
+                    <div class="card" style="width: 18rem;">
+                        <img  class="center" align="middle" style="padding-top: 8px;" width="150px" src="images/bet/betp2p3.png" alt="lucky lucky">
+                      
+                      <div class="card-body">
+                        <div><span class="token-info"><strong>fifa world cup 2018 a system where you can place a bet without depending on anyone. </strong> </span><span id="name"></span></div>
+                        
+                        <a id="get_lucky" href="/bet" class="btn btn-primary">More</a>
+                      </div>
+                       <div id="buysuccess" class="alert alert-success" style="display:none">
+                                Гүйлгээ амжилттай хийгдлээ, доорх хаягаар орж шалгана уу.<br>
+                                <a id="txlink" target="_blank" href="https://ropsten.etherscan.io/tx/"></a>
+                            </div>
+                    </div>
+                    
+        	 		
+
+        	 	</div>
+        	 	<div class="col-xl-5" >
+        	 		<br>
+                    <div class="card" style="width: 18rem; margin-left: 20px;">
+        	 			<img  class="center" align="middle" style="padding-top: 40px;padding-bottom: 40px;" width="150px" src="/images/luckybyums.png" alt="lucky lucky">
+					  
+					  <div class="card-body">
+                        
+                        <div><span class="token-info"><strong> one time price: </strong> </span><span id="name"></span>100 UMS</div>
+					    <div><span class="token-info"><strong> chance round 1: </strong> </span><span id="name"></span>20%</div>
+					    <div><span class="token-info"><strong> price round 1: </strong> </span><span id="name">500 UMS</span></div>
+					    <div><span class="token-info"><strong> chance round 2: </strong> </span><span id="name">1%</span></div>
+					    <div><span class="token-info"><strong> price round 2: </strong> </span><span id="name">10000 UMS</span></div>
+                        
+					    <a id="get_lucky_ums" href="#" class="btn btn-primary" style="margin-top: 14px;">get lucky</a>
+					  </div>
+			           <div id="buysuccess" class="alert alert-success" style="display:none">
+                                Гүйлгээ амжилттай хийгдлээ, доорх хаягаар орж шалгана уу.<br>
+                                <a id="txlink" target="_blank" href="https://ropsten.etherscan.io/tx/"></a>
+                            </div>
+					</div>  
+                        <br>
+                    <div class="card" style="width: 18rem; margin-left: 20px;">
+                        <img  class="center" align="middle" style="padding-top: 40px;padding-bottom: 40px;" width="150px" src="/images/ipfs.png" alt="lucky lucky">
+                      
+                      <div class="card-body">
+                        
+                        <div><span class="token-info"><strong> Smart contract + IPFS = fair and transparent VAT lottery system. </strong> </span><span id="name"></span></div>
+                                                
+                      </div>
+                       <div id="buysuccess" class="alert alert-success" style="display:none">
+                                Гүйлгээ амжилттай хийгдлээ, доорх хаягаар орж шалгана уу.<br>
+                                <a id="txlink" target="_blank" href="https://ropsten.etherscan.io/tx/"></a>
+                            </div>
+                    </div> 
+        	 		
+        	 	</div>
+        	 	<div class="col-xl-4" >
+        	 		<br>
+        	 		
+        	 		<div class="card" style="width: 18rem; margin-left: 15px !important; background-color: #17a2b8!important; ">
+					  <div class="card-body">
+					    <h5 class="card-title"><strong>Your balance:</strong></h5>
+					        <div><span class="token-info"><strong>UMS: </strong> </span><span id="balance">0</span></div>
+					        <div><span class="token-info"><strong>ETH: </strong> </span><span id="balance_eth">0</span></div>
+					  </div>
+					</div>
+        	 		
+                    
+        	 	</div>
+        	 </div>	   <!-- row -->
+
+        </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="./scripts/web3.min.js"></script>
+    <script src="./scripts/moment.min.js"></script>
+    <script src="./scripts/bignumber.min.js"></script>
+
+    <script type="text/javascript">    
+      
+      
+      const unimediatoken_address = '0x579276922c9a10a7dd909f0a4a841bdc4c4d8862';
+      window.onload = function() {
+
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+             web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/hq9l5D1Moq7KjYPgyfNn"));
+            
+        }
+
+          web3.eth.defaultAccount = web3.eth.accounts[0];
+          if (web3.eth.defaultAccount) {
+           document.getElementById('add').innerHTML =web3.eth.defaultAccount;
+           document.getElementById('address').className = '';
+           document.getElementById('address').className = 'alert alert-primary';
+           
+	       }else{
+	       document.getElementById('add').innerHTML = 'You must login by metamask';
+	       document.getElementById('address').className = '';
+           document.getElementById('address').className = 'alert alert-danger';
+	       }
+         
+        var unimediatokenContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"price","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeSub","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeDiv","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"},{"name":"_data","type":"bytes"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeMul","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"safeAdd","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"sellcloseTIMESTAMP","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}]);
+
+
+            
+            window.unimediatoken= unimediatokenContract.at(unimediatoken_address);
+            console.log(window.unimediatokenContract );
+
+          web3.eth.getAccounts(function(err, accs) {
+                if (err) return console.error(err);
+                  var acc = web3.eth.defaultAccount;
+
+	               web3.eth.getBalance(acc, (err, res) => {
+                        if (err) return console.error(err);
+                        balance = web3.toDecimal(res);
+						document.getElementById('balance_eth').innerHTML = web3.fromWei(balance, 'ether') + '';
+  					})
+	                //Will give value in.
+					
+
+                if (accs.length) {
+                  
+                    unimediatoken.balanceOf(acc, (err, res) => {
+                        if (err) return console.error(err);
+                        var balance = new BigNumber(res);
+                        var balance =balance/100;
+                        document.getElementById('balance').innerHTML = balance.toString() + '';
+                    })
+                    
+                } else {
+                    // document.getElementById('locked').style = 'block';
+                }
+    
+                   
+            }); // web3.eth
+
+          // START LUCKY LUCKY
+          var dayluckyContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"totalFundETH","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"max","type":"uint256"}],"name":"setRandom_max","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"random_max","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"jackpot_lucky","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"winners_eth","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"lucky_number","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"winners_address","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"winners","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getWinnerCountETH","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"winners_eth_address","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawUMS","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getWinnerCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"lucky","type":"uint8"}],"name":"setLucky","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_amount","type":"uint256"},{"name":"_data","type":"bytes"}],"name":"tokenFallback","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getWinnerAddressLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawETH","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getWinnerETHAddressLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"gettotalFundETH","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_tokenAddress","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"winnerCount","type":"uint256"},{"indexed":true,"name":"_winner","type":"address"},{"indexed":false,"name":"_price","type":"uint256"}],"name":"Won","type":"event"}]);
+
+			const lucky_address = '0x303a298f61160b44a4c6372768c83eb052a68baf';
+  			window.luckylucky= dayluckyContract.at(lucky_address);
+            console.log(window.luckylucky );
+      
+		        $("#get_lucky").click(function() {
+			       
+        		   var acc= web3.eth.defaultAccount;                    
+                   web3.eth.sendTransaction({from: acc, to: lucky_address, gas: 3000000, value: web3.toWei(0.01)}, function(err, hash) {
+                        if (err) return console.error(err);                
+                        document.getElementById('txlink').href += hash;
+                        document.getElementById('txlink').innerHTML = hash;
+                        document.getElementById('buysuccess').style.display = 'block';
+                    });
+		          
+		        }); 
+                $("#get_lucky_ums").click(function() {
+                   
+                    var abiData = unimediatoken.transfer.getData(luckylucky.address,  100*100);
+                    web3.eth.sendTransaction({to: unimediatoken.address, gas: 3000000, data: abiData}, function(err, hash) {
+                        if (err) return console.error(err);
+                        
+                        document.getElementById('txlink').href += hash;
+                        document.getElementById('txlink').innerHTML = hash;
+                        document.getElementById('buysuccess').style.display = 'block';
+                    });
+                  
+                }); 
+                
+  
+      } // window.load
+    
+     
+    </script>
+
+  </body>
+</html>
